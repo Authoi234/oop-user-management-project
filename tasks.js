@@ -1,6 +1,6 @@
 import { Database } from "./database";
 
-class Tasks extends Database {
+export class Tasks extends Database {
     #allTasks;
 
     async load() {
@@ -29,5 +29,20 @@ class Tasks extends Database {
 
     getTasks() {
         return [...this.#allTasks]
+    }
+
+    getUserTask(id_of_user){
+        return this.#allTasks.filter(task=> task.userId === id_of_user)
+    }
+
+    async addTask(task) {
+        if (!task.id) task.id = crypto.randomUUID();
+        this.#allTasks.push(task);
+        await this.save();
+    }
+
+    async removeTask(id_taskToDelete) {
+        this.#allTasks = this.#allTasks.filter(task => task?.id !== id_taskToDelete);
+        await this.save();
     }
 }

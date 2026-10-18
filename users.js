@@ -44,4 +44,12 @@ export class Users extends Database {
         this.#allUsers = this.#allUsers.filter(user => user?.id !== id_userToDelete);
         await this.save();
     }
+
+    getUser(id){
+        return this.#allUsers.find(user => user.id == id);
+    }
+
+    getUserByUsername(username){
+        return this.#allUsers.find(user => user.username == username);
+    }
 }

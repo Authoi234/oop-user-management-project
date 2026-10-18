@@ -22,10 +22,6 @@ export class User {
         this.name = typeof name == 'string' && name.length >= 4 ? name : this.name;
     }
 
-    showTasks() {
-
-    }
-
     getUsername() {
         return this.#username;
     }
