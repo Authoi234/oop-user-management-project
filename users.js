@@ -1,13 +1,14 @@
+import { Database } from "./database.js";
 import { User } from "./user.js";
 import { readFile, writeFile } from "node:fs/promises";
 
-export class Users {
+export class Users extends Database {
     #allUsers;
-    #file = new URL("./db.json", import.meta.url);
 
     async load() {
-        const res = await readFile(this.#file, "utf8");
-        const data = JSON.parse(res);
+        await super.loadUsers();
+
+        const data = this.getUserData()
 
         this.#allUsers = data.users.map(recordedUser => {
             const user = new User(
@@ -23,12 +24,10 @@ export class Users {
     }
 
     async save() {
-        await writeFile(
-            this.#file,
-            JSON.stringify({
-                users: this.#allUsers.map(user => user.object_format())
-            }, null, 4)
+        this.getUserData().users = this.#allUsers.map(
+            user => user.object_format()
         );
+        await super.save("users")
     }
 
     getUsers() {

@@ -22,6 +22,10 @@ export class User {
         this.name = typeof name == 'string' && name.length >= 4 ? name : this.name;
     }
 
+    showTasks() {
+
+    }
+
     getUsername() {
         return this.#username;
     }
@@ -71,15 +75,5 @@ export class Admin extends User {
 
     removeUser(user) {
         this.#usersManager.removeUser(user);
-    }
-}
-
-export class Task {
-    constructor(id, title, description, userId) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.userId = userId;
-        this.createdAt = new Date().toISOString();
     }
 }
