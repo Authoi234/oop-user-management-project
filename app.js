@@ -4,38 +4,49 @@ import { Tasks } from "./tasks.js";
 import { Admin, User } from "./user.js";
 import { Users } from "./users.js";
 
-const users = new Users();
-const tasks = new Tasks();
-await users.load();
-await tasks.load();
-
 const admin_password = (await hashPassword("Password123")) || process.env.Admin_Password;
+
+const userManager = new Users();
+const tasks = new Tasks();
+await userManager.load();
+await tasks.load();
 
 const admin = await new Admin(
     "Admin",
     "Administrator",
     "admin",
     admin_password,
-    users,
+    userManager,
+    tasks,
 );
 
 const createUser = async (name, job, username, password) => {
-    const user = await User.create(name,job,username, password);
-    await users.addUser(user);
+    const user = await User.create(name, job, username, password);
+    await admin.addUser(user);
     return user;
 }
 
 const assignTask = async (title, description, userid) => {
-    const task = await Task(title, description, userid);
-    await tasks.addTask(task);
+    const task = new Task(title, description, userid);
+    await admin.addTask(task);
     return task;
 }
 
-const authoi = await createUser("Authoi", "Developer", "Authoi123", "secret123");
-await assignTask("Learn Algorithm", "Learn 1 week of algorithm", users.getUserByUsername(authoi.getUsername())?.id);
 
+// app starts
 
+//~ all passwords are hashed by bcrypt - slow process but secure ~//
+
+const authoi = await createUser("Authoi", "Developer", "Authoi234", "secret123");
+await createUser("Auvro", "Developer", "Auvro123", "passwordsecret");
+
+const username_authoi = authoi.username
+console.log(username_authoi);
 console.log(admin.viewUsers());
-console.log(tasks);
-const usere = admin.viewUsers()[0];
-console.log(usere.getUsername());
+
+await assignTask("Learn Algorithm", "Learn 1 week of algorithm", userManager.getUserId(username_authoi));
+await assignTask("Learn Montumia's System design", "Complete within today", userManager.getUserId(username_authoi));
+await assignTask("Complete python part 2", "Learn requeset module fast", userManager.getUserId("Auvro123"));
+
+console.log(admin.viewTasks());
+console.log(admin.getTaskOfUser(username_authoi));

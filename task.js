@@ -1,6 +1,6 @@
 export class Task {
-    constructor(title, description, userId, createdAt = null) {
-        this.id;
+    constructor(title, description, userId, createdAt = null, id = null) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.userId = userId;
@@ -9,13 +9,11 @@ export class Task {
 
     object_format() {
         return {
-            id: this.id ?? null,
+            id: this.id,
             title: this.title,
             description: this.description,
             userId: this.userId,
             createdAt: this.createdAt,
         };
     }
-
-    
 }

@@ -1,6 +1,5 @@
 import { Database } from "./database.js";
 import { User } from "./user.js";
-import { readFile, writeFile } from "node:fs/promises";
 
 export class Users extends Database {
     #allUsers;
@@ -35,6 +34,9 @@ export class Users extends Database {
     }
 
     async addUser(user) {
+        const usernameExists = this.#allUsers.some(existingUser => existingUser.username === user.username);
+        if (usernameExists) throw new Error(`Username "${user.username}" is already taken.`);
+
         if (!user.id) user.id = crypto.randomUUID();
         this.#allUsers.push(user);
         await this.save();
@@ -45,11 +47,11 @@ export class Users extends Database {
         await this.save();
     }
 
-    getUser(id){
+    getUser(id) {
         return this.#allUsers.find(user => user.id == id);
     }
 
-    getUserByUsername(username){
-        return this.#allUsers.find(user => user.username == username);
+    getUserId(username) {
+        return this.#allUsers.find(user => user.username == username).id;
     }
 }

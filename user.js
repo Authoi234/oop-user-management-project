@@ -22,7 +22,7 @@ export class User {
         this.name = typeof name == 'string' && name.length >= 4 ? name : this.name;
     }
 
-    getUsername() {
+    get username() {
         return this.#username;
     }
 
@@ -55,10 +55,12 @@ export class User {
 
 export class Admin extends User {
     #usersManager;
+    #taskManager;
 
-    constructor(name, job, username, hash_password, usersManager) {
+    constructor(name, job, username, hash_password, usersManager, taskManager) {
         super(name, job, username, hash_password);
         this.#usersManager = usersManager;
+        this.#taskManager = taskManager;
     }
 
     viewUsers() {
@@ -71,5 +73,22 @@ export class Admin extends User {
 
     removeUser(user) {
         this.#usersManager.removeUser(user);
+    }
+
+    viewTasks() {
+        return this.#taskManager.getTasks();
+    }
+
+    addTask(task) {
+        this.#taskManager.addTask(task);
+    }
+
+    removeTask(id) {
+        this.#taskManager.removeTask(id);
+    }
+
+    getTaskOfUser(username) {
+        const id = this.#usersManager.getUserId(username);
+        return this.#taskManager.getUserTask(id);
     }
 }

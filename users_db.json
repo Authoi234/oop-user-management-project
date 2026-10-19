@@ -1,5 +1,20 @@
 {
     "users": [
-        
+        {
+            "id": "970be315-2441-4c4a-b9ba-ef25e0efce83",
+            "name": "Authoi",
+            "job": "Developer",
+            "username": "Authoi234",
+            "password": "$2b$10$9X5S44zZEABd6aRnvcYNFuHzDIOZrF2zV2giin5JMyszLNb9KmEva",
+            "profile_pic_url": ""
+        },
+        {
+            "id": "34dd32a7-9d8c-41bf-a114-baee017250d9",
+            "name": "Auvro",
+            "job": "Developer",
+            "username": "Auvro123",
+            "password": "$2b$10$Do7Zvj5F4HoJEDlwo.XYReNvppVl8Wrxgh7Zy4/Ih6gS8jC0VdeQ2",
+            "profile_pic_url": ""
+        }
     ]
 }

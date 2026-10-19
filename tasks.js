@@ -1,4 +1,5 @@
-import { Database } from "./database";
+import { Database } from "./database.js";
+import { Task } from "./task.js";
 
 export class Tasks extends Database {
     #allTasks;
@@ -13,9 +14,9 @@ export class Tasks extends Database {
                 recordedTask.title,
                 recordedTask.description,
                 recordedTask.userId,
-                recordedTask.createdAt
+                recordedTask.createdAt,
+                recordedTask.id
             );
-            task.id = recordedTask.id;
             return task;
         });
     }
@@ -36,7 +37,9 @@ export class Tasks extends Database {
     }
 
     async addTask(task) {
+        console.log(task.id)
         if (!task.id) task.id = crypto.randomUUID();
+        console.log(task.id)
         this.#allTasks.push(task);
         await this.save();
     }

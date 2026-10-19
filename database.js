@@ -15,13 +15,23 @@ export class Database {
     }
 
     async loadUsers() {
-        const res = await readFile(this.#userfile, "utf8");
-        this.#usersdata = JSON.parse(res);
+        try {
+            const res = await readFile(this.#userfile, "utf8");
+            this.#usersdata = JSON.parse(res.trim() || "[]");
+        } catch (error) {
+            console.error("Failed to read or parse task file, resetting data:", error.message);
+            this.#usersdata = [];
+        }
     }
 
     async loadTasks() {
-        const res = await readFile(this.#taskfile, "utf8");
-        this.#tasksdata = JSON.parse(res);
+        try {
+            const res = await readFile(this.#taskfile, "utf8");
+            this.#tasksdata = JSON.parse(res.trim() || "[]");
+        } catch (error) {
+            console.error("Failed to read or parse task file, resetting data:", error.message);
+            this.#tasksdata = [];
+        }
     }
 
     getUserData() {
@@ -41,6 +51,7 @@ export class Database {
     }
 
     async save(db_name) {
+        let file, data;
         if (db_name === "users") {
             file = this.#userfile;
             data = this.#usersdata;
