@@ -1,19 +1,19 @@
 {
     "users": [
         {
-            "id": "970be315-2441-4c4a-b9ba-ef25e0efce83",
+            "id": "e8e7fc7c-0b7e-44b8-8f86-7efb356ded1b",
             "name": "Authoi",
             "job": "Developer",
             "username": "Authoi234",
-            "password": "$2b$10$9X5S44zZEABd6aRnvcYNFuHzDIOZrF2zV2giin5JMyszLNb9KmEva",
-            "profile_pic_url": ""
+            "password": "$2b$10$f63HTue169rcuXsgZVOitemmJwt78I2Xg51WSSIgzrFK.SQ3s/87u",
+            "profile_pic_url": "https://avatars.githubusercontent.com/u/101743873?v=4"
         },
         {
-            "id": "34dd32a7-9d8c-41bf-a114-baee017250d9",
+            "id": "b9b149ec-353c-4eb0-a99a-f7026d12fd38",
             "name": "Auvro",
             "job": "Developer",
             "username": "Auvro123",
-            "password": "$2b$10$Do7Zvj5F4HoJEDlwo.XYReNvppVl8Wrxgh7Zy4/Ih6gS8jC0VdeQ2",
+            "password": "$2b$10$qOfIx01ac2ncTrkb4Cs5ne6FDDsa/0cT0a5MmaCydsEJWEkK3NSQe",
             "profile_pic_url": ""
         }
     ]

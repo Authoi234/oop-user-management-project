@@ -22,13 +22,13 @@ const admin = await new Admin(
 
 const createUser = async (name, job, username, password) => {
     const user = await User.create(name, job, username, password);
-    await admin.addUser(user);
+    admin.addUser(user);
     return user;
 }
 
 const assignTask = async (title, description, userid) => {
     const task = new Task(title, description, userid);
-    await admin.addTask(task);
+    admin.addTask(task);
     return task;
 }
 
@@ -50,3 +50,9 @@ await assignTask("Complete python part 2", "Learn requeset module fast", userMan
 
 console.log(admin.viewTasks());
 console.log(admin.getTaskOfUser(username_authoi));
+
+// userManager.getUser(authoi.id).updateProfilePic("https://avatars.githubusercontent.com/u/101743873?v=4");
+authoi.updateProfilePic("https://avatars.githubusercontent.com/u/101743873?v=4")
+userManager.save();
+
+console.log(authoi);
